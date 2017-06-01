@@ -1,6 +1,6 @@
 # facebook_bot
 
-Crystal shard for Facebook Bot API
+Crystal shard for Facebook Messenger Bot API
 
 ## Installation
 
@@ -14,13 +14,15 @@ dependencies:
 
 ## Usage
 
+See `examples/echo_bot`
+
 ```crystal
 require "facebook_bot"
 ```
 
 ## Contributing
 
-1. Fork it ( https://github.com/manastech/facebook_bot/fork )
+1. Fork it
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)

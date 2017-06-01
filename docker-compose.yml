@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  bot:
+    image: crystallang/crystal:0.22.0
+    command: crystal examples/echo_bot.cr
+    working_dir: /app
+    volumes:
+      - '.:/app'
+    ports:
+      - 8080:80
+    environment:
+      ACCESS_TOKEN: "ACCESS_TOKEN"
+      VERIFY_TOKEN: "VERIFY_ME"
+  ngrok:
+    image: fnichol/ngrok
+    command: "bot:80"
+    ports:
+      - 4040:4040
