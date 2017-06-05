@@ -6,8 +6,8 @@ module FacebookBot::GetUser
 
   FIELDS = %w(first_name last_name profile_pic locale timezone gender)
 
-  def user_profile(user_id, fields = FIELDS)
-    url = "https://graph.facebook.com/v2.6/#{user_id}?access_token=#{access_token}&fields=#{fields.join(",")}"
+  def user_profile(user_id, fields = FIELDS, token = nil)
+    url = "https://graph.facebook.com/v2.6/#{user_id}?access_token=#{token || access_token}&fields=#{fields.join(",")}"
     response = HTTP::Client.get(url, HTTP::Headers{"Content-Type" => "application/json"})
     if !response.success?
       logger.warn("Unsuccessful retrieving user profile for #{user_id}: #{response.status_message} #{response.status_code}\n#{response.body.try(&.to_s)}")

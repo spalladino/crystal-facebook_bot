@@ -5,13 +5,13 @@ module FacebookBot
     include FacebookBot::SendMessage
     include FacebookBot::GetUser
 
-    getter access_token
+    getter! access_token
     getter verify_token
     getter logger
 
     @server : HTTP::Server?
 
-    def initialize(@access_token : String, @verify_token : String, @logger : Logger)
+    def initialize(@access_token : String?, @verify_token : String, @logger : Logger)
     end
 
     abstract def handle_message(message, entry)
