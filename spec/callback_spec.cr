@@ -89,7 +89,8 @@ describe FacebookBot::Bot do
 
     messages = callback.messaging(FacebookBot::Incoming::Message).to_a
     messages.size.should eq(3)
-    messages.map(&.sender.id).should eq(["USER_ID", "USER_ID_2", "USER_ID_3"])
-    messages.map(&.text).should eq(["hello, world!", "hola, mundo!", "bye, world!"])
+    messages.map(&.first.sender.id).should eq(["USER_ID", "USER_ID_2", "USER_ID_3"])
+    messages.map(&.first.text).should eq(["hello, world!", "hola, mundo!", "bye, world!"])
+    messages.map(&.last.id).should eq(["PAGE_ID", "PAGE_ID", "PAGE_ID"])
   end
 end

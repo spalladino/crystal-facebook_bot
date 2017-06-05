@@ -6,9 +6,10 @@ class EchoBot < FacebookBot::Bot
     super(access_token, verify_token, Logger.new(STDOUT))
   end
 
-  def handle_message(message)
+  def handle_message(message, entry)
     logger.info("Received message #{message.text}")
-    send_text(message.sender.id, message.text)
+    user = user_profile!(message.sender.id)
+    send_text(message.sender.id, "Hello #{user.first_name} #{user.last_name}!\n\n#{message.text}")
   end
 end
 

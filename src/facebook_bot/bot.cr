@@ -3,6 +3,7 @@ require "http/server"
 module FacebookBot
   abstract class Bot
     include FacebookBot::SendMessage
+    include FacebookBot::GetUser
 
     getter access_token
     getter verify_token
@@ -13,7 +14,7 @@ module FacebookBot
     def initialize(@access_token : String, @verify_token : String, @logger : Logger)
     end
 
-    abstract def handle_message(message)
+    abstract def handle_message(message, entry)
 
     def serve(bind_address : String = "127.0.0.1", bind_port : Int32 = 80, ssl_certificate_path : String | Nil = nil, ssl_key_path : String | Nil = nil)
       server = HTTP::Server.new(bind_address, bind_port, [ReceiveHandler.new(self, @logger), VerificationHandler.new(@verify_token, @logger)])

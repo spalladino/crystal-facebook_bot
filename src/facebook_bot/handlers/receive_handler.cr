@@ -10,8 +10,8 @@ module FacebookBot
     def call(context : HTTP::Server::Context)
       if context.request.method == "POST"
         callback = FacebookBot::Incoming::Callback.from_json(context.request.body.not_nil!)
-        callback.messaging(FacebookBot::Incoming::Message).each do |msg|
-          spawn { @bot.handle_message(msg) }
+        callback.messaging(FacebookBot::Incoming::Message).each do |(msg, entry)|
+          spawn { @bot.handle_message(msg, entry) }
         end
         context.response.status_code = 200
         context.response.puts("OK")
