@@ -13,6 +13,9 @@ module FacebookBot
         callback.messaging(FacebookBot::Incoming::Message).each do |(msg, entry)|
           spawn { @bot.handle_message(msg, entry) }
         end
+        callback.messaging(FacebookBot::Incoming::Postback).each do |(msg, entry)|
+          spawn { @bot.handle_postback(msg, entry) }
+        end
         context.response.status_code = 200
         context.response.puts("OK")
       else

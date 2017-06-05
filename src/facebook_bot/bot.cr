@@ -16,6 +16,9 @@ module FacebookBot
 
     abstract def handle_message(message, entry)
 
+    def handle_postback(postback, entry)
+    end
+
     def serve(bind_address : String = "127.0.0.1", bind_port : Int32 = 80, ssl_certificate_path : String | Nil = nil, ssl_key_path : String | Nil = nil)
       server = HTTP::Server.new(bind_address, bind_port, [ReceiveHandler.new(self, @logger), VerificationHandler.new(@verify_token, @logger)])
       if ssl_certificate_path && ssl_key_path
