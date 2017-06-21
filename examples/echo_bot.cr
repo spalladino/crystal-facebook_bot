@@ -9,7 +9,7 @@ class EchoBot < FacebookBot::Bot
   def handle_message(message, entry)
     logger.info("Received message #{message.text}")
     user = user_profile!(message.sender.id)
-    send_text(message.sender.id, "Hello #{user.first_name} #{user.last_name}!\n\n#{message.text}")
+    send_text_with_quick_replies(message.sender.id, "Hello #{user.first_name} #{user.last_name}!\n\n#{message.text}", ["Yes", "No", "Maybe"])
   end
 end
 
