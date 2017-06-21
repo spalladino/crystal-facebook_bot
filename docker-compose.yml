@@ -9,8 +9,9 @@ services:
       - '.:/app'
     ports:
       - 8080:80
+    env_file:
+      - .env
     environment:
-      ACCESS_TOKEN: "ACCESS_TOKEN"
       VERIFY_TOKEN: "VERIFY_ME"
   ngrok:
     image: fnichol/ngrok
